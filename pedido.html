@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="stylesheet" href="indexe.html">
+    <title>Pedido</title>
+</head>
+
+<body>
+    <h1>Informações do Pedido</h1>
+    <form id="meuFormulario">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" required><br><br>
+        
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" required><br><br>
+        
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" required><br><br>
+        
+        <label for="complemento">Complemento do Endereço:</label>
+        <input type="text" id="complemento"><br><br>
+        
+        <button type="button" onclick="finalizarPedido()"><a href="indexe.html">Finalizar Pedido</a></button>
+    </form>
+
+<div id="barraCarregamento" style="display: none;">
+    <p>Processando número de pedido...</p>
+    <progress></progress>
+</div>
+    <div id="numeroPedido"></div>
+
+    <script>
+        function finalizarPedido() {
+  const nome = document.getElementById('nome').value;
+    const telefone = document.getElementById('telefone').value;
+    const endereco = document.getElementById('endereco').value;
+    const complemento = document.getElementById('complemento').value;
+
+    if (nome === '' || telefone === '' || endereco === '') {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+        return;
+    }
+
+    // Exibir barra de carregamento e esconder formulário
+    document.getElementById('barraCarregamento').style.display = 'block';
+    document.getElementById('meuFormulario').style.display = 'none';
+
+    // Simular um processamento demorado (1 segundo neste exemplo)
+    setTimeout(() => {
+        const numeroPedido = gerarNumeroPedido();
+        document.getElementById('numeroPedido').innerText = `Seu número de pedido é: ${numeroPedido}`;
+        
+        // Esconder barra de carregamento e mostrar número de pedido
+        document.getElementById('barraCarregamento').style.display = 'none';
+        document.getElementById('numeroPedido').style.display = 'block';
+    }, 1000); // Tempo de espera simulado de 1 segundo
+}
+        
+
+        function gerarNumeroPedido() {
+            return Math.floor(Math.random() * 1000000);
+        }
+
+       
+    </script>
+</body>
+
+</html>

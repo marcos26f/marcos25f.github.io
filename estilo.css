@@ -1,0 +1,197 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 30px auto;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input[type="text"] {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #5cb85c;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+#numeroPedido {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #dff0d8;
+    color: #3c763d;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 1px rgba(0, 76, 69, 0.075);
+}
+.campo-obrigatorio {
+    border: 1px solid red;
+}
+
+.modal {
+    display: none; /* Inicialmente oculta */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro com transparência */
+  }
+  
+  .modal-content {
+    background-color: #fefefe; /* Cor de fundo do conteúdo modal */
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .modal h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  .modal p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+  
+  .modal button {
+    padding: 10px 20px;
+    background-color: #007bff; /* Cor de fundo do botão */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+  }
+  
+  .modal button:hover {
+    background-color: #0056b3; /* Mudança de cor ao passar o mouse */
+  }
+
+  /* Estilo dos botões + e - */
+.boton-mais,
+.boton-menos {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+/* Estilo do botão de adicionar complemento na aba do carrinho */
+.boton-adicionar-complemento {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.boton-adicionar-complemento:hover {
+    background-color: #218838;
+}
+
+/* Estilizando botões quando pressionados */
+.boton-mais:active,
+.boton-menos:active,
+.boton-adicionar-complemento:active {
+    transform: translateY(1px);
+}
+
+.item-count {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Estilo para o botão do carrinho */
+.button.menu__button {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo para o contador do carrinho */
+#contador-carrinho {
+  background-color: gray; /* Cor inicial quando o contador é zero */
+  color: white;
+  border-radius: 50%;
+  padding: 0.25em 0.5em;
+  font-size: 0.75rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 1.5em;
+  min-height: 1.5em;
+}
+
+/* Estilo quando o contador é maior que zero */
+#contador-carrinho.ativo {
+  background-color: orange; /* Cor quando o contador é maior que zero */
+}

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <title>Lecos's Burguer</title>
+   
+</head>
+
+<body>
+
+    <!--barra de rolagem-->
+    <a href="#" class="scrolltop" id="scroll-top">
+        <i class='bx bx-chevron-up scrolltop__icon'></i>
+    </a>
+
+    <header class="l-header" id="header">
+        <nav class="nav bd-container">
+            <a href="index.html" class="nav__logo">Leco's Burger</a>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html#home" class="nav__link">Casa</a></li>
+                    <li class="nav__item"><a href="indexe.html" class="nav__link active-link">Pedidos</a></li>
+                    <li class="nav__item"><a href="index.html#contact" class="nav__link">contatos</a></li>
+                    <li><i class='bx bx-moon change-theme' id="theme-button"></i></li>
+                </ul>
+            </div>
+
+            <div class="menu__detail">
+                <button class="button menu__button" onclick="abrirMiniJanela()"><i class='bx bx-cart-alt'></i>
+                    <span id="contador-carrinho" class="contador">0</span>
+                </button>
+
+                <div id="carrinho" class="carrinho-popup">
+                    <h2 style="color: orange;">Carrinho de Compras</h2>
+                    <ul id="lista-produtos"></ul>
+                    <p>Total: <span id="total">R$ 0,00</span></p>
+                    <textarea id="observacoes-gerais" placeholder="Adicione observações gerais sobre seu pedido..."
+                        class="observacoes"></textarea>
+                    <button class="botao-carrinho" onclick="fecharMiniJanela()">
+                        <i class='bx bx-x'></i>
+                    </button>
+                    <button class="botao-carrinho" onclick="finalizarPedido()">
+                        <i class='bx bx-cart-alt'></i>
+                    </button>
+                    <button class="botao-carrinho" onclick="capturarTelaCarrinho()">
+                        <i class='bx bx-camera'></i>
+                    </button>
+                </div>
+
+                <div id="modalComplemento" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2 style="text-align: center; color: white;">Escolha seu complemento</h2>
+                        <!-- Conteúdo do Modal -->
+                        <form id="formComplementos" action="/caminho_para_o_servidor" method="POST">
+                            <div id="modalComplementos" class="modal-complementos">
+                                <!-- Conteúdo do Modal em formato de tabela -->
+                                <table style="width: 100%;">
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento1.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Bacon Extra
+                                                </td>
+                                                <td colspan="3"
+                                                    '
+                                            style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Fatias crocantes de bacon defumado
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+                                            <input type="checkbox" id="baconExtra" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                        onclick=" adicionarComplemento(' Bacon Extra', 3.00,
+                                                this.checked);">
+                                            <label for="baconExtra" style="font-size: larger;">R$ 3,00</label>
+                                        </td>
+                                    </tr>
+                                    <!-- Repita a estrutura <tr>...</tr> para os outros itens -->
+
+
+
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento2.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Cebola Caramelizada
+                                                </td>
+                                                <td colspan="3"
+                                                    '
+                                            style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Cebola lentamente caramelizada para adicionar doçura.
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+                                            <input type="checkbox" id="CebolaCaramelizada" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                        onclick=" adicionarComplemento(' Cebola Caramelizada', 2.00,
+                                                this.checked);">
+                                            <label for="CebolaCaramelizada" style="font-size: larger;">R$ 2,00</label>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento3.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Cheddar Cremoso
+                                                </td>
+                                                <td colspan="3"
+                                                    '
+                                            style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Porção extra de cheddar derretido e cremoso.
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+                                            <input type="checkbox" id="cheddarCremoso" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                        onclick=" adicionarComplemento(' Cheddar Cremoso', 2.50,
+                                                this.checked);">
+                                            <label for="cheddarCremoso" style="font-size: larger;">R$ 2,50</label>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento4.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Ovo Frito
+                                                </td>
+                                                <td colspan="3"
+                                                    '
+                                            style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Ovo frito com gema mole para incrementar seu lanche.
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+                                            <input type="checkbox" id="OvoFrito" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                        onclick=" adicionarComplemento(' Ovo Frito', 2.50,
+                                                this.checked);">
+                                            <label for="OvoFrito" style="font-size: larger;">R$ 2,50</label>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento5.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Molho Especial
+                                                </td>
+                                                <td colspan="3"
+                                                    '
+                                            style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Molho caseiro da casa com especiarias únicas.
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+                                            <input type="checkbox" id="MolhoEspecial" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                    onclick=" adicionarComplemento(' Molho Especial', 1.50,
+                                                this.checked);">
+                                            <label for="MolhoEspecial" style="font-size: larger;">R$ 1,50</label>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento6.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Avocado Smash
+                                                </td>
+                                                <td colspan="3"
+                                                   ' style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Purê de abacate temperado com limão e pimenta.
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+                                            <input type="checkbox" id="AvocadoSmash" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                    onclick=" adicionarComplemento(' Avocado Smash', 4.00,
+                                                this.checked);">
+                                            <label for="AvocadoSmash" style="font-size: larger;">R$ 4,00</label>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento7.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Picles Extra
+                                                </td>
+                                                <td colspan="3"
+                                                    '
+                                            style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Fatias extras de picles para um toque ácido
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+                                            <input type="checkbox" id="PiclesExtra" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                    onclick=" adicionarComplemento(' Picles Extra', 1.00,
+                                                this.checked);">
+                                            <label for="PiclesExtra" style="font-size: larger;">R$ 1,00</label>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento8.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Queijo Gorgonzola
+                                                </td>
+                                                <td colspan="3"
+                                                    '
+                                            style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Porção de gorgonzola para os amantes de queijos fortes.
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+                                            <input type="checkbox" id="Queijo Gorgonzola" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                    onclick=" adicionarComplemento(' QueijoGorgonzola', 4.00,
+                                                this.checked);">
+                                            <label for="QueijoGorgonzola" style="font-size: larger;">R$ 4,00</label>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <h2 style="text-align: center; color: white;">Para Sobremesas</h2>
+
+                                <table style="width: 100%;">
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento9.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Calda de Chocolate
+                                                </td>
+                                                <td colspan="3"
+                                                    '
+                                            style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Calda de chocolate ricamente saborosa para drizzlar.
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+
+                                            <input type="checkbox" id="CaldaDeChocolate" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                    onclick=" adicionarComplemento(' Calda de Chocolate', 2.00,
+                                                this.checked);">
+                                            <label for="CaldaDeChocolate" style="font-size: larger;">R$ 2,00</label>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento10.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Calda de Caramelo
+                                                </td>
+                                                <td colspan="3"
+                                                    '
+                                            style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Calda de caramelo salgado para um toque gourmet.
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+                                            <input type="checkbox" id="CaldaDeCaramelo" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                    onclick=" adicionarComplemento(' Calda de Caramelo', 2.00,
+                                                this.checked);">
+                                            <label for="CaldaDeCaramelo" style="font-size: larger;">R$ 2,00</label>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento11.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Chantilly Caseiro
+                                                </td>
+                                                <td colspan="3"
+                                                    '
+                                            style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Porção de chantilly feito na casa, leve e doce.
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+                                            <input type="checkbox" id="ChantillyCaseiro" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                    onclick=" adicionarComplemento(' Chantilly Caseiro', 1.50,
+                                                this.checked);">
+                                            <label for="ChantillyCaseiro" style="font-size: larger;">R$ 1,50</label>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento12.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Amendoim Triturado
+                                                </td>
+                                                <td colspan="3"
+                                                    '
+                                            style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Amendoim torrado e triturado para adicionar crocância.
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+                                            <input type="checkbox" id="AmendoimTriturado" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                    onclick=" adicionarComplemento(' Amendoim Triturado', 2.00,
+                                                this.checked);">
+                                            <label for="AmendoimTriturado" style="font-size: larger;">R$ 2,00</label>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento13.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Frutas Frescas
+                                                </td>
+                                                <td colspan="3"
+                                                   ' style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Mix de frutas da estação cortadas em pequenos pedaços.
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+                                            <input type="checkbox" id="FrutasFrescas" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                    onclick=" adicionarComplemento(' Frutas Frescas', 3.00,
+                                                this.checked);">
+                                            <label for="FrutasFrescas" style="font-size: larger;">R$ 3,00</label>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento14.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Confeitos Coloridos
+                                                </td>
+                                                <td colspan="3"
+                                                    '
+                                            style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Confeitos multicoloridos para alegrar sua sobremesa.
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+                                            <input type="checkbox" id="ConfeitosColoridos" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                    onclick=" adicionarComplemento(' Confeitos Coloridos', 1.00,
+                                                this.checked);">
+                                            <label for="ConfeitosColoridos" style="font-size: larger;">R$ 1,00</label>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento15.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Granola Artesanal
+                                                </td>
+                                                <td colspan="3"
+                                                    '
+                                            style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Granola crocante com nozes e mel para textura extra.
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+                                            <input type="checkbox" id="CaldaDeCaramelo" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                    onclick=" adicionarComplemento(' Calda de Caramelo', 2.00,
+                                                this.checked);">
+                                            <label for="CaldaDeCaramelo" style="font-size: larger;">R$ 2,00</label>
+                                        </td>
+                                    </tr>
+
+                                    <tr style="border-bottom: 1px solid #ccc;">
+                                        <td style="width: 10%; padding: 5px;">
+                                            <img src="assets/img/complemento16.png" style="width: 100%;"
+                                                alt="Ícone do item">
+                                        </td>
+                                        <td colspan="3" 'style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                                    Mini Marshmallows
+                                                </td>
+                                                <td colspan="3"
+                                                    '
+                                            style="text-align: center; font-size: larger; padding: 10px 5px;">
+                                            Marshmallows pequenos para adicionar diversão e doçura
+                                        </td>
+                                        <td style="width: 25%; padding-left: 20px; vertical-align: middle;">
+                                            <input type="checkbox" id="MiniMarshmallows" 'style="width: 20px; height: 20px; margin-right: 10px; vertical-align: middle;""
+                                                    onclick=" adicionarComplemento(' Mini Marshmallows', 1.50,
+                                                this.checked);">
+                                            <label for="MiniMarshmallows" style="font-size: larger;">R$ 1,50</label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+            </div>
+        </nav>
+    </header>
+
+
+
+    <div class="nav__toggle" id="nav-toggle">
+        <i class='bx bx-menu'></i>
+    </div>
+    </nav>
+    </header>
+
+    <section id="menu" class="menu section bd-container">
+        <h2 class="section-title">Pedidos</h2>
+        <div class="menu__container bd-grid">
+            <div class="menu__content">
+                <img src="assets/img/prato1.jpg" alt="Classico Lecos" class="menu__img">
+                <h3 class="menu__name">Classico Leco</h3>
+                <span class="menu__detail">Hambúrguer de carne bovina grelhada, alface, tomate, cebola, picles e molho
+                    especial da casa. Servido em pão brioche</span>
+                <span class="menu__price">R$22,90</span>
+                <button class="button menu__button" onclick="adicionarAoCarrinho('Classico Lecos', 22.90)"><i
+                        class='bx bx-cart-alt'></i></button>
+
+            </div>
+
+            <div class="menu__content">
+                <img src="assets/img/prato2.jpg" alt="Cheese Bacon Lecos" class="menu__img">
+                <h3 class="menu__name">Cheese Bacon Leco</h3>
+                <span class="menu__detail"> Delicioso hambúrguer de carne bovina, coberto com queijo cheddar derretido,
+                    fatias crocantes de bacon, alface e tomate. Servido em pão brioche com molho barbecue.</span>
+                <span class="menu__preci">R$ 27,90</span>
+                <button class="button menu__button" onclick="adicionarAoCarrinho('Cheese Bacon Lecos', 27.90)"><i
+                        class='bx bx-cart-alt'></i></button>
+            </div>
+
+            <div class="menu__content">
+                <img src="assets/img/prato3.jpg" alt="Veggie Delight" class="menu__img">
+                <h3 class="menu__name">Veggie Delight</h3>
+                <span class="menu__detail">Hambúrguer vegetariano feito de quinoa e feijão preto, com alface, tomate,
+                    cebola roxa e molho de abacate. Servido em pão integral.</span>
+                <span class="menu__preci"> R$ 25,90</span>
+                <button class="button menu__button" onclick="adicionarAoCarrinho('Veggie Delight', 25.90)"><i
+                        class='bx bx-cart-alt'></i></button>
+            </div>
+
+
+            <div class="menu__content">
+                <img src="assets/img/prato4.jpg" alt="Firehouse Lecos" class="menu__img">
+                <h3 class="menu__name">Firehouse Leco </h3>
+                <span class="menu__detail"> Hambúrguer de carne bovina picante, com jalapeños, queijo pepper jack,
+                    alface, cebola roxa e nosso molho de pimenta caseiro. Servido em pão brioche. </span>
+                <span class="menu__preci">R$ 28,90</span>
+                <button class="button menu__button" onclick="adicionarAoCarrinho('Firehouse Lecos', 28.90)"><i
+                        class='bx bx-cart-alt'></i></button>
+            </div>
+
+            <div class="menu__content">
+                <img src="assets/img/prato5.jpg" alt="Batatas Frita" class="menu__img">
+                <h3 class="menu__name">Batatas Fritas</h3>
+                <span class="menu__detail">Crocantes por fora, macias por dentro.</span>
+                <span class="menu__preci">R$9,90</span>
+                <button class="button menu__button" onclick="adicionarAoCarrinho('Batatas Fritas', 9.90)"><i
+                        class='bx bx-cart-alt'></i></button>
+            </div>
+
+
+            <div class="menu__content">
+                <img src="assets/img/prato6.jpg" alt="Onion Rings" class="menu__img">
+                <h3 class="menu__name">Onion Rings</h3>
+                <span class="menu__detail">Anéis de cebola empanados e fritos até ficarem dourados.</span>
+                <span class="menu__preci"> 11,90</span>
+                <button class="button menu__button" onclick="adicionarAoCarrinho('Onion Rings', 11.90)"><i
+                        class='bx bx-cart-alt'></i></button>
+            </div>
+
+            <div class="menu__content">
+                <img src="assets/img/prato7.jpg" alt="Batata Doce Frita" class="menu__img">
+                <h3 class="menu__name">Batata Doce Frita</h3>
+                <span class="menu__detail">Batatas doces cortadas e fritas, servidas com molho de iogurte e ervas</span>
+                <span class="menu__preci">R$12,90</span>
+                <button class="button menu__button" onclick="adicionarAoCarrinho('Batata Doce Frita', 12.90)"><i
+                        class='bx bx-cart-alt'></i></button>
+            </div>
+
+
+            <div class="menu__content">
+                <img src="assets/img/prato8.jpg" alt="Refrigerante" class="menu__img">
+                <h3 class="menu__name">Refrigerante</h3>
+                <span class="menu__detail"> Coca-Cola, Fanta, Sprite. </span>
+                <span class="menu__preci"> R$ 4,90</span>
+                <button class="button menu__button" onclick="adicionarAoCarrinho('Refrigerante', 4.90)"><i
+                        class='bx bx-cart-alt'></i></button>
+            </div>
+
+            <div class="menu__content">
+                <img src="assets/img/prato9.jpg" alt="Água Mineral" class="menu__img">
+                <h3 class="menu__name">Água Mineral</h3>
+                <span class="menu__detail"> Com ou sem gás. </span>
+                <span class="menu__preci">R$3,90</span>
+                <button class="button menu__button" onclick="adicionarAoCarrinho('Água Mineral', 3.90)"><i
+                        class='bx bx-cart-alt'></i></button>
+            </div>
+
+
+            <div class="menu__content">
+                <img src="assets/img/prato10.jpg" alt="Shake de Oreo" class="menu__img">
+                <h3 class="menu__name">Shake de Oreo</h3>
+                <span class="menu__detail">Milkshake cremoso com pedaços de biscoito Oreo.</span>
+                <span class="menu__preci">R$14,90</span>
+                <button class="button menu__button" onclick="adicionarAoCarrinho('Shake de Oreo', 14.90)"><i
+                        class='bx bx-cart-alt'></i></button>
+            </div>
+
+            <div class="menu__content">
+                <img src="assets/img/prato11.jpg" alt="Suco Natural" class="menu__img">
+                <h3 class="menu__name">Suco Natural</h3>
+                <span class="menu__detail"> Laranja, Limonada, Maracujá</span>
+                <span class="menu__preci">R$7,90</span>
+                <button class="button menu__button" onclick="adicionarAoCarrinho('Suco Natural', 7.90)"><i
+                        class='bx bx-cart-alt'></i></button>
+            </div>
+
+
+            <div class="menu__content">
+                <img src="assets/img/prato12.jpg" alt="Brownie de Chocolate " class="menu__img">
+                <h3 class="menu__name">Brownie de Chocolate </h3>
+                <span class="menu__detail"> Com nozes, servido quente com sorvete de baunilha.</span>
+                <span class="menu__preci">16,90</span>
+                <button class="button menu__button" onclick="adicionarAoCarrinho('Brownie de Chocolate', 16.90)"><i
+                        class='bx bx-cart-alt'></i></button>
+            </div>
+
+            <div class="menu__content">
+                <img src="assets/img/prato13.jpg" alt="Cheesecake de Frutas Vermelhas " class="menu__img">
+                <h3 class="menu__name">Cheesecake de Frutas Vermelhas</h3>
+                <span class="menu__detail">Cheesecake cremoso com cobertura de frutas vermelhas</span>
+                <span class="menu__preci">18,90</span>
+                <button class="button menu__button"
+                    onclick="adicionarAoCarrinho('Cheesecake de Frutas Vermelhas', 18.90)"><i
+                        class='bx bx-cart-alt'></i></button>
+            </div>
+
+            <div class="menu__content">
+                <img src="assets/img/prato14.jpg" alt="Sundae Lecos" class="menu__img">
+                <h3 class="menu__name">Sundae Lecos</h3>
+                <span class="menu__detail">Sorvete de baunilha com calda de chocolate, chantilly e uma cereja no
+                    topo</span>
+                <span class="menu__preci">13,90</span>
+                <button class="button menu__button" onclick="adicionarAoCarrinho('Sundae Lecos', 13.90)"><i
+                        class='bx bx-cart-alt'></i></button>
+            </div>
+
+            <script src="main.js">
+            </script>
+
+
+
+
+    </section>
+
+
+    <div class="footer__content">
+        <footer class="footer section bd-container">
+            <div class="footer__container bd-grid">
+                <div class="footer__content">
+                    <a href="#" class="footer__logo">Leco's Burger </a>
+                    <span class="footer__description">hamburgueria</span>
+                    <div>
+                        <a href="#" class="footer__social"><i class='bx bxl-facebook'></i></a>
+                        <a href="#" class="footer__social"><i class='bx bxl-instagram'></i></a>
+                        <a href="#" class="footer__social"><i class='bx bxl-twitter'></i></a>
+                    </div>
+                </div>
+
+
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Informação</h3>
+                    <ul>
+                        <li><a href="#" class="footer__link">Entre em contato conosco</a></li>
+                        <li><a href="#" class="footer__link">Política de privacidade</a></li>
+                        <li><a href="#" class="footer__link">Termos de serviço</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer__content">
+                    <h3 class="footer__title">Endereço</h3>
+                    <ul>
+                        <li>São Paulo - Brasil</li>
+                        <li>Proximo ao centro</li>
+                        <li>999 - 888 - 777</li>
+                        <li>Leco'sBurger@gemail.com</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="footer__copy">&#169; Bedimcode 2020. Todos os direitos reservados</p>
+        </footer>
+
+
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script src="assets/js/main.js"></script>
+
+
+        <!-- Biblioteca html2canvas -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+        
+        <script src="https://unpkg.com/scrollreveal"></script>
+        <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

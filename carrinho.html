@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .carrinho {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        h2 {
+            color: orange;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+
+        .item-buttons {
+            display: flex;
+            align-items: center;
+        }
+
+        .item-quantity {
+            margin: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="carrinho">
+        <h2>Carrinho de Compras</h2>
+        <div id="produtos"></div>
+        <p>Total: <span id="total"></span></p>
+        <p>Observações:</p>
+        <pre id="observacoes"></pre>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = new URLSearchParams(window.location.search);
+            const produtos = decodeURIComponent(params.get('produtos')).split(',');
+            const total = params.get('total');
+            const observacoes = decodeURIComponent(params.get('observacoes'));
+
+            document.getElementById('total').innerText = total;
+            document.getElementById('observacoes').innerText = observacoes;
+
+            produtos.forEach(produto => {
+                createItemElement(produto.trim());
+            });
+        });
+
+        function createItemElement(productDetails) {
+            const produtosDiv = document.getElementById('produtos');
+
+            const [productName, productPrice] = productDetails.split(':');
+
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('item');
+
+            const nameSpan = document.createElement('span');
+            nameSpan.innerText = `${productName} - ${productPrice}`;
+
+            const itemButtonsDiv = document.createElement('div');
+            itemButtonsDiv.classList.add('item-buttons');
+
+            const quantitySpan = document.createElement('span');
+            quantitySpan.id = `quantity-${productName.replace(/\s/g, '-')}`;
+            quantitySpan.classList.add('item-quantity');
+            quantitySpan.innerText = '1';
+
+            const complementButton = document.createElement('button');
+            complementButton.innerText = 'Adicionar Complementos';
+            complementButton.onclick = () => addComplementos(productName);
+
+            const removeButton = document.createElement('button');
+            removeButton.innerText = 'Remover';
+            removeButton.onclick = () => removeItem(itemDiv);
+
+            itemButtonsDiv.appendChild(quantitySpan);
+            itemButtonsDiv.appendChild(complementButton);
+            itemButtonsDiv.appendChild(removeButton);
+
+            itemDiv.appendChild(nameSpan);
+            itemDiv.appendChild(itemButtonsDiv);
+
+            produtosDiv.appendChild(itemDiv);
+        }
+
+        function removeItem(itemDiv) {
+            itemDiv.remove();
+            // Adicione lógica para atualizar o total conforme necessário
+        }
+
+        function addComplementos(productName) {
+            // Lógica para adicionar complementos ao produto
+            alert(`Complementos adicionados ao ${productName}!`);
+        }
+    </script>
+</body>
+
+</html>
