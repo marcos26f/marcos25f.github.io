@@ -978,3 +978,32 @@ button:hover {
 .botao-carrinho:hover {
   background-color: #c9302c;
 }
+.login__container {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.login__form-group {
+    margin-bottom: 15px;
+}
+
+.login__form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login__form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.button {
+    background-color: #28a745; /* Cor do botão */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

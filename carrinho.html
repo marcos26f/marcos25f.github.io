@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
     <title>Carrinho</title>
     <style>
         body {
@@ -38,6 +40,19 @@
         .item-quantity {
             margin: 0 10px;
         }
+
+        .finalizar-btn {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: green;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .finalizar-btn:hover {
+            background-color: darkgreen;
+        }
     </style>
 </head>
 
@@ -48,6 +63,7 @@
         <p>Total: <span id="total"></span></p>
         <p>Observações:</p>
         <pre id="observacoes"></pre>
+        <button class="finalizar-btn" onclick="location.href='entrega.html'">Finalizar Pedido</button>
     </div>
 
     <script>
@@ -67,7 +83,6 @@
 
         function createItemElement(productDetails) {
             const produtosDiv = document.getElementById('produtos');
-
             const [productName, productPrice] = productDetails.split(':');
 
             const itemDiv = document.createElement('div');
@@ -80,24 +95,18 @@
             itemButtonsDiv.classList.add('item-buttons');
 
             const quantitySpan = document.createElement('span');
-            quantitySpan.id = `quantity-${productName.replace(/\s/g, '-')}`;
+            quantitySpan.id = `quantity-${productName.replace()}`;
             quantitySpan.classList.add('item-quantity');
             quantitySpan.innerText = '1';
-
-            const complementButton = document.createElement('button');
-            complementButton.innerText = 'Adicionar Complementos';
-            complementButton.onclick = () => addComplementos(productName);
 
             const removeButton = document.createElement('button');
             removeButton.innerText = 'Remover';
             removeButton.onclick = () => removeItem(itemDiv);
 
             itemButtonsDiv.appendChild(quantitySpan);
-            itemButtonsDiv.appendChild(complementButton);
-            itemButtonsDiv.appendChild(removeButton);
-
+           
             itemDiv.appendChild(nameSpan);
-            itemDiv.appendChild(itemButtonsDiv);
+            
 
             produtosDiv.appendChild(itemDiv);
         }
@@ -105,11 +114,6 @@
         function removeItem(itemDiv) {
             itemDiv.remove();
             // Adicione lógica para atualizar o total conforme necessário
-        }
-
-        function addComplementos(productName) {
-            // Lógica para adicionar complementos ao produto
-            alert(`Complementos adicionados ao ${productName}!`);
         }
     </script>
 </body>
