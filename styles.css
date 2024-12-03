@@ -1,17 +1,43 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f3f4f6;
+    background-color:black;;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0; /* Remover margem do body */
+    padding: 0; /* Remover padding do body */
+    overflow: hidden; /* Impede a barra de rolagem */
+}
+
+.carousel-container {
+    position: absolute; /* Sobrepõe ao fundo */
+    width: 99%;
+    height: 98vh; /* A altura do carrossel ocupa toda a tela */
+    overflow: hidden;
+    z-index: 1; /* Z-index menor para o carrossel */
+    
+}
+
+.carousel {
+    display: flex;
+    animation: slide 12s infinite; /* Duração total do carrossel */
+}
+
+.carousel img {
+    min-width: 100%; /* Cada imagem ocupa toda a área do carrossel */
+    height: 100vh; /* Faz as imagens ocuparem toda a altura da tela */
+    object-fit: cover; /* Cobre o espaço */
 }
 
 .container {
-    background-color: white;
+    position: relative; /* Permite que elementos absolutos dentro dela se posicionem em relação */
+    z-index: 2; /* Z-index maior para a camada do menu */
+    background: white; /* Fundo sólido para o formulário */
+    
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
     width: 300px;
 }
 
@@ -35,7 +61,7 @@ input {
 
 button {
     padding: 10px;
-    background-color: #007bff;
+    background-color: green;
     color: white;
     border: none;
     border-radius: 4px;
@@ -43,52 +69,33 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
-}
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f3f4f6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color:d;
 }
 
-.container {
-    background-color: white;
+.form-container {
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
 }
 
-.form-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+@keyframes slide {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(0); }
+    25% { transform: translateX(-100%); }
+    45% { transform: translateX(-100%); }
+    50% { transform: translateX(-200%); }
+    70% { transform: translateX(-200%); }
+    75% { transform: translateX(0); }
+    100% { transform: translateX(0); }
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-input {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
+@keyframes slide-inverted {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(0); }
+    25% { transform: translateX(100%); } /* Alterado para mover para a direita */
+    45% { transform: translateX(100%); }
+    50% { transform: translateX(200%); }
+    70% { transform: translateX(200%); }
+    75% { transform: translateX(0); }
+    100% { transform: translateX(0); }
 }
